@@ -1,25 +1,43 @@
 <script>
 	import Canvas from '$lib/components/Canvas.svelte';
 	import Settings from '$lib/components/Settings.svelte';
+	import TextAreaAuto from '$lib/components/TextAreaAuto.svelte';
+	import Usage from '$lib/components/Usage.svelte';
 	import { appText } from '$lib/store';
 	import { Accordion, AccordionItem } from '@skeletonlabs/skeleton';
 </script>
 
-<div class="mx-2 h-full grid grid-cols-2 gap-4 mt-4">
-	<div class="bg-white h-full p-2">
-		<Accordion>
+<div class="mx-2 grid grid-cols-2 gap-4 mt-4">
+	<div class="bg-white p-2">
+		<Accordion autocollapse>
+			<AccordionItem>
+				<svelte:fragment slot="summary">Your own font</svelte:fragment>
+				<svelte:fragment slot="content">
+					<Usage/>
+				</svelte:fragment>
+			</AccordionItem>
 			<AccordionItem>
 				<svelte:fragment slot="summary">Settings</svelte:fragment>
 				<svelte:fragment slot="content">
 					<Settings/>
 				</svelte:fragment>
 			</AccordionItem>
+			<AccordionItem open>
+				<svelte:fragment slot="summary">Text</svelte:fragment>
+				<svelte:fragment slot="content">
+					<TextAreaAuto bind:value={$appText} minRows={10}/>
+				</svelte:fragment>
+			</AccordionItem>
 		</Accordion>
 
-		<textarea class="textarea h-full mt-2" bind:value={$appText}/>
 	</div>
 	<div>
 		<Canvas />
 	</div>
 </div>
 
+<style>
+	.min-h-90 {
+		min-height: 90%;
+	}
+</style>

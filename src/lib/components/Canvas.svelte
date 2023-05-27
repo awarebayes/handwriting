@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { appText, fontSize, lineHeight, pixelOffsetRangeBigNewLineXMax, pixelOffsetRangeBigNewLineXMin, pixelOffsetRangeMax, pixelOffsetRangeMin, startX, startY,
-	pixelOffsetRangeNewLineYMin, pixelOffsetRangeNewLineYMax, initCanvasWidth } from "$lib/store";
+	pixelOffsetRangeNewLineYMin, pixelOffsetRangeNewLineYMax, initCanvasWidth, pixelOffsetSinDX, pixelOffsetSinStrength, dummyReloadCanvas } from "$lib/store";
 	import { onMount } from "svelte";
 
 	let canvas: HTMLCanvasElement;
@@ -15,7 +15,10 @@
         context.fillRect(0, 0, canvas.width, canvas.height);
     }
 
-    onMount(clear)
+    onMount(()=> {
+		draw($appText);
+		setTimeout(()=>draw($appText), 50)
+	})
 
 
 
@@ -34,6 +37,7 @@
 		// Set the initial position
 		var x = $startX;
 		var y = $startY;
+		var sin_x = 0;
 
 		// Iterate over each character in the text
 		for (var i = 0; i < text.length; i++) {
@@ -45,7 +49,7 @@
 
 			// Calculate the new position with offsets
 			var newX = x + xOffset;
-			var newY = y + yOffset;
+			var newY = y + yOffset + Math.sin(sin_x) * $pixelOffsetSinStrength;
 
 			// Draw the character at the new position
 			context.fillText(char, newX, newY);
@@ -53,9 +57,10 @@
 			// Update the x position for the next character
 			var charWidth = context.measureText(char).width;
 			x += charWidth;
+			sin_x += $pixelOffsetSinDX + Math.random() * $pixelOffsetSinDX * 2;
 
 			// Check if the x position exceeds the canvas width
-			if (x + charWidth >= canvas.width * 2 || char == "\n") {
+			if (x + charWidth * 3 >= canvas.width || char == "\n") {
 				// Start a new line if the width is exceeded
 				x = $startX + getRandomInt($pixelOffsetRangeBigNewLineXMin, $pixelOffsetRangeBigNewLineXMax);
 				y += $lineHeight + Math.abs(getRandomInt($pixelOffsetRangeNewLineYMin, $pixelOffsetRangeNewLineYMax));
@@ -77,10 +82,12 @@
 	}
 
     $: draw($appText)
-    $: $fontSize, $lineHeight, $startX, $startY, $pixelOffsetRangeMin, $pixelOffsetRangeMax, $pixelOffsetRangeBigNewLineXMax, $pixelOffsetRangeBigNewLineXMin, $pixelOffsetRangeNewLineYMin,
-	$pixelOffsetRangeNewLineYMax,
-	$initCanvasWidth,
+    $: $pixelOffsetRangeNewLineYMin,
+	$pixelOffsetRangeNewLineYMax, $initCanvasWidth, $fontSize, $lineHeight, $startX, $startY, $pixelOffsetRangeMin, $pixelOffsetRangeMax, $pixelOffsetRangeBigNewLineXMax, $pixelOffsetRangeBigNewLineXMin, 
+	$pixelOffsetSinDX, $pixelOffsetSinStrength,
+	$dummyReloadCanvas,
 	 draw($appText)
+
 </script>
 
 <div class="canvas-container" bind:this={canvasContainer}>
