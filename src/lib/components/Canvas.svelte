@@ -17,6 +17,7 @@
 
     onMount(()=> {
 		draw($appText);
+		setTimeout(()=>draw($appText), 50)
 		setTimeout(()=>draw($appText), 250)
 	})
 
