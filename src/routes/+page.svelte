@@ -8,7 +8,7 @@
 </script>
 
 <div class="mx-2 grid sm:grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
-	<div class="bg-white p-2">
+	<div class="bg-white dark:bg-slate-600 p-2">
 		<Accordion autocollapse>
 			<AccordionItem>
 				<svelte:fragment slot="summary">Your own font</svelte:fragment>
@@ -30,7 +30,7 @@
 			</AccordionItem>
 		</Accordion>
 	</div>
-	<div>
+	<div class="">
 		<Canvas />
 	</div>
 </div>
