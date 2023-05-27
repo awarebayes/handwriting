@@ -7,29 +7,28 @@
 	import { Accordion, AccordionItem } from '@skeletonlabs/skeleton';
 </script>
 
-<div class="mx-2 grid grid-cols-2 gap-4 mt-4">
+<div class="mx-2 grid sm:grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
 	<div class="bg-white p-2">
 		<Accordion autocollapse>
 			<AccordionItem>
 				<svelte:fragment slot="summary">Your own font</svelte:fragment>
 				<svelte:fragment slot="content">
-					<Usage/>
+					<Usage />
 				</svelte:fragment>
 			</AccordionItem>
 			<AccordionItem>
 				<svelte:fragment slot="summary">Settings</svelte:fragment>
 				<svelte:fragment slot="content">
-					<Settings/>
+					<Settings />
 				</svelte:fragment>
 			</AccordionItem>
 			<AccordionItem open>
 				<svelte:fragment slot="summary">Text</svelte:fragment>
 				<svelte:fragment slot="content">
-					<TextAreaAuto bind:value={$appText} minRows={10}/>
+					<TextAreaAuto bind:value={$appText} minRows={10} />
 				</svelte:fragment>
 			</AccordionItem>
 		</Accordion>
-
 	</div>
 	<div>
 		<Canvas />

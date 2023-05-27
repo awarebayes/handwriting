@@ -1,25 +1,21 @@
 <script>
 	export let value = '';
 	export let minRows = 1;
-	
+
 	$: minHeight = `${1 + minRows * 3}em`;
 </script>
 
-<div class="container">
-	<pre
-		aria-hidden="true"
-		style="min-height: {minHeight};"
-	>{value + '\n'}</pre>
-
-	<textarea bind:value></textarea>	
+<div class="container max-w-full">
+	<textarea bind:value style="min-height: {minHeight};" />
 </div>
 
 <style>
 	.container {
 		position: relative;
 	}
-	
-	pre, textarea {
+
+	pre,
+	textarea {
 		font-family: inherit;
 		padding: 0.5em;
 		box-sizing: border-box;
@@ -27,12 +23,11 @@
 		line-height: 1.2;
 		overflow: hidden;
 	}
-	
+
 	textarea {
-		position: absolute;
-		width: 100%;
 		height: 100%;
+		width: 100%;
 		top: 0;
-        overflow-y: scroll;
+		overflow-y: scroll;
 	}
 </style>

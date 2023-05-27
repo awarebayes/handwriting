@@ -1,38 +1,47 @@
 <script lang="ts">
-	import { appText, fontSize, lineHeight, pixelOffsetRangeBigNewLineXMax, pixelOffsetRangeBigNewLineXMin, pixelOffsetRangeMax, pixelOffsetRangeMin, startX, startY,
-	pixelOffsetRangeNewLineYMin, pixelOffsetRangeNewLineYMax, initCanvasWidth, pixelOffsetSinDX, pixelOffsetSinStrength, dummyReloadCanvas } from "$lib/store";
-	import { onMount } from "svelte";
+	import {
+		appText,
+		fontSize,
+		lineHeight,
+		pixelOffsetRangeBigNewLineXMax,
+		pixelOffsetRangeBigNewLineXMin,
+		pixelOffsetRangeMax,
+		pixelOffsetRangeMin,
+		startX,
+		startY,
+		pixelOffsetRangeNewLineYMin,
+		pixelOffsetRangeNewLineYMax,
+		initCanvasWidth,
+		pixelOffsetSinDX,
+		pixelOffsetSinStrength,
+		dummyReloadCanvas
+	} from '$lib/store';
+	import { onMount } from 'svelte';
 
 	let canvas: HTMLCanvasElement;
-    let canvasContainer: HTMLDivElement;
-
+	let canvasContainer: HTMLDivElement;
 
 	const clear = () => {
-        if (!canvas)
-            return
+		if (!canvas) return;
 		var context = canvas.getContext('2d')!;
-        context.fillStyle = "white";
-        context.fillRect(0, 0, canvas.width, canvas.height);
-    }
+		context.fillStyle = 'white';
+		context.fillRect(0, 0, canvas.width, canvas.height);
+	};
 
-    onMount(()=> {
+	onMount(() => {
 		draw($appText);
-		setTimeout(()=>draw($appText), 50)
-		setTimeout(()=>draw($appText), 250)
-	})
-
-
+		setTimeout(() => draw($appText), 50);
+		setTimeout(() => draw($appText), 250);
+	});
 
 	const draw = (text: string) => {
-        if (!canvas)
-            return
+		if (!canvas) return;
 		var context = canvas.getContext('2d')!;
-        context.fillStyle = "white";
-        context.fillRect(0, 0, canvas.width, canvas.height);
-
+		context.fillStyle = 'white';
+		context.fillRect(0, 0, canvas.width, canvas.height);
 
 		// Set the font properties
-        context.fillStyle = "black";
+		context.fillStyle = 'black';
 		context.font = $fontSize + 'px Myfont';
 
 		// Set the initial position
@@ -61,38 +70,49 @@
 			sin_x += $pixelOffsetSinDX + Math.random() * $pixelOffsetSinDX * 2;
 
 			// Check if the x position exceeds the canvas width
-			if (x + charWidth * 3 >= canvas.width || char == "\n") {
+			if (x + charWidth * 3 >= canvas.width || char == '\n') {
 				// Start a new line if the width is exceeded
-				x = $startX + getRandomInt($pixelOffsetRangeBigNewLineXMin, $pixelOffsetRangeBigNewLineXMax);
-				y += $lineHeight + Math.abs(getRandomInt($pixelOffsetRangeNewLineYMin, $pixelOffsetRangeNewLineYMax));
+				x =
+					$startX + getRandomInt($pixelOffsetRangeBigNewLineXMin, $pixelOffsetRangeBigNewLineXMax);
+				y +=
+					$lineHeight +
+					Math.abs(getRandomInt($pixelOffsetRangeNewLineYMin, $pixelOffsetRangeNewLineYMax));
 
-                if (y + $lineHeight >= canvas.height) {
-                    // Adjust the canvas height and scroll to the bottom
-                    canvas.height += $lineHeight * 10;
-                    canvasContainer.scrollTop = canvasContainer.scrollHeight;
-                    draw(text);
-                }
+				if (y + $lineHeight >= canvas.height) {
+					// Adjust the canvas height and scroll to the bottom
+					canvas.height += $lineHeight * 10;
+					canvasContainer.scrollTop = canvasContainer.scrollHeight;
+					draw(text);
+				}
 			}
 		}
 	};
-
 
 	// Function to get a random integer between min and max (inclusive)
 	function getRandomInt(min: number, max: number) {
 		return Math.floor(Math.random() * (max - min + 1)) + min;
 	}
 
-    $: draw($appText)
-    $: $pixelOffsetRangeNewLineYMin,
-	$pixelOffsetRangeNewLineYMax, $initCanvasWidth, $fontSize, $lineHeight, $startX, $startY, $pixelOffsetRangeMin, $pixelOffsetRangeMax, $pixelOffsetRangeBigNewLineXMax, $pixelOffsetRangeBigNewLineXMin, 
-	$pixelOffsetSinDX, $pixelOffsetSinStrength,
-	$dummyReloadCanvas,
-	 draw($appText)
-
+	$: draw($appText);
+	$: $pixelOffsetRangeNewLineYMin,
+		$pixelOffsetRangeNewLineYMax,
+		$initCanvasWidth,
+		$fontSize,
+		$lineHeight,
+		$startX,
+		$startY,
+		$pixelOffsetRangeMin,
+		$pixelOffsetRangeMax,
+		$pixelOffsetRangeBigNewLineXMax,
+		$pixelOffsetRangeBigNewLineXMin,
+		$pixelOffsetSinDX,
+		$pixelOffsetSinStrength,
+		$dummyReloadCanvas,
+		draw($appText);
 </script>
 
 <div class="canvas-container" bind:this={canvasContainer}>
-    <canvas bind:this={canvas} width={$initCanvasWidth} height={$initCanvasWidth}/>
+	<canvas bind:this={canvas} width={$initCanvasWidth} height={$initCanvasWidth} />
 </div>
 
 <style>
@@ -101,9 +121,8 @@
 		height: 100%;
 	}
 
-    .canvas-container {
-      height: 100%;
-      overflow: auto;
-    }
-
+	.canvas-container {
+		height: 100%;
+		overflow: auto;
+	}
 </style>
