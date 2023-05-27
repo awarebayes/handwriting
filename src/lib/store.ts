@@ -3,7 +3,7 @@ import { writable } from 'svelte/store';
 export let appText =
 	writable<string>(`This text is fully reactive. You can change it and watch the canvas change as well.
 Russian and english are supported out of the box.
-You can add your own handwriting fond and play with settings.
+You can add your own handwriting font and play with settings.
 You can save the result just by pressing save image on the canvas to the right.
 
 ---

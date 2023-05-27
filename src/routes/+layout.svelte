@@ -17,7 +17,7 @@
 				<span class="text-sm text-gray-300 ml-2"> by awarebayes </span>
 			</span>
 			<span class="ml-4">
-				Made with 🍑️️️️️️, <a href="https://svelte.dev/" style="color: #FE3F00">svelte</a>, and
+				Made with ❤️, <a href="https://svelte.dev/" style="color: #FE3F00">svelte</a>, and
 				<a href="https://workers.cloudflare.com/" style="color: #F69A3D">workers</a>
 				<a href="https://github.com/awarebayes/handwriting" class="ml-2">
 					<svg
