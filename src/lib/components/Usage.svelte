@@ -1,6 +1,6 @@
 <div>
 	1. Generate fonts <a href="https://www.calligraphr.com/" class="text-blue-700">here</a>. After
-	generating 75 symbols, build font, test it, save it, and then delete. Generate new 75 symbols.
+	handwriting 75 symbols, build font, test it, save it locally, and then delete font in the app. Then create a new font with different new 75 symbols.
 	<br />
 	2. Merge generated fonts
 	<a href="https://products.aspose.app/font/merger/ttf-to-ttf" class="text-blue-600">here</a>

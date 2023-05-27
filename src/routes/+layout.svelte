@@ -12,14 +12,17 @@
 <AppShell>
 	<svelte:fragment slot="pageHeader">
 		<div class="p-4 bg-white dark:bg-slate-900 text-lg flex justify-between items-center">
-			<span class="">
-				<a href="/" class="hidden md:inline">
+			<span class="hidden md:inline">
+				<a href="/" class="h">
 					Handwriting Generator
 				</a>
-				<a class="inline md:hidden" href="/">
+				<a class="text-sm text-gray-300 ml-1 md:ml-2 underline" href="https://github.com/awarebayes/"> by awarebayes </a>
+			</span>
+			<span class="inline md:hidden">
+				<a href="/">
 					HG
 				</a>
-				<a class="text-sm text-gray-300 ml-1 md:ml-2 underline" href="https://github.com/awarebayes/"> by awarebayes </a>
+				<a class="text-sm text-gray-300 ml-1 md:ml-2 underline" href="https://github.com/awarebayes/"> by ab </a>
 			</span>
 
 			<span class="ml-4 text-sm sm:text-lg">
